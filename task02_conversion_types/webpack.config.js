@@ -37,7 +37,6 @@ module.exports = {
         test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
         type: 'asset/resource',
       },
-      /** SCSS/SAAS */
       {
         test: /\.s[ac]ss$/i,
         use: [
@@ -48,7 +47,6 @@ module.exports = {
           // Compiles Sass to CSS
           "sass-loader",
         ],
-        // npm i style-loader css-loader sass sass-loader -D
       },
       // fonts
       {
