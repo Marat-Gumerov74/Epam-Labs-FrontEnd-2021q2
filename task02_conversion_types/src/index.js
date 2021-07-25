@@ -1,2 +1,3 @@
-import "./reset.scss";
-import "./style.scss";
+import "./style/reset.scss";
+import "./style/style.scss";
+
