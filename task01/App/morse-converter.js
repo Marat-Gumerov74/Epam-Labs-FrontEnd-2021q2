@@ -1,25 +1,31 @@
 const { encode } = require('morsee');
-const readline = require('readline-sync');
 
 class MorseConverter {
 
-  async createPhrase() {
-    let phrase = await readline.question("Give me phrase in english! ");
-    return phrase;
+  ask(query) {
+    const readline = require("readline").createInterface({
+      input: process.stdin,
+      output: process.stdout
+    })
+
+    return new Promise(resolve => readline.question(query, ans => {
+      readline.close();
+      resolve(ans);
+    }))
   }
 
   isCirillick = (str) => {
-    return /[\u0400-\u04FF]/.test(str);
+    return /[\u0400-\u04FF]/.test(str)
   }
 
-  makeMorse = () => {
-    this.createPhrase()
-    .then((phrase) => {
-      if (!this.isCirillick(phrase)) {
-        console.log(encode(phrase));
-      }
-    })
+  async main (){
+    let phrase = await this.ask("What Phrase your need translate in morse?")
+
+    if (this.isCirillick(phrase)) {
+      console.log(`Your phrase: ${phrase} - your phrase contains Cyrillic characters!`);
+    }
+    console.log(encode(phrase));
   }
-};
+}
 
 module.exports = MorseConverter;
