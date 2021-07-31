@@ -1,11 +1,12 @@
- import {  base } from './base.js';
-
 export class Calculator {
   constructor(){
+    this.valueBase = [ true, false, 1,0,-1, "true","false","1","0","-1","",null,
+                       undefined,Infinity,-Infinity,[],{},[[]],[0],[1],NaN ]
     this.display = null;
     this.memory = null;
     this.operator = null;
     this.ready = false;
+    this.result = null;
   }
 
   setOperator(str) {
@@ -23,8 +24,19 @@ export class Calculator {
   }
 
   calculate() {
-    const result = base[this.memory];
-    this.onDisplay(`${this.memory}   --- is be  ${result}`);
+    let conversion;
+    if (this.operator === 'if') {
+      this.onDisplay(`${this.memory}   --- is be  ${this.result}`)
+    } else {
+      const first = this.result[0][1];
+      const second = this.result[1][1];
+      if (this.operator === '==') {
+        conversion = first == second;
+      } else if (this.operator === '===') {
+        conversion = first === second;
+      }
+      this.onDisplay(`${this.memory}   --- is be  ${conversion}`);
+    }
   }
 
   addOperand() {
@@ -36,11 +48,13 @@ export class Calculator {
         if  (action > 0 && (this.operator === "==" || this.operator === "===")) {
           if (event.target.className === 'operand__item') {
             if (this.memory && action) {
-              this.memory += ` ${this.operator} ${event.target.innerText}`;
-              this.onDisplay(this.memory);
+              this.result.push([`${event.target.innerHTML}`, this.valueBase[event.target.dataset.item]]);
+              this.memory += `${this.operator} ${event.target.innerHTML}`;
+              this.onDisplay(`${this.memory}`);
               action--;
-            } else if (action) {
-              this.memory = `${event.target.innerText}`;
+            } else if (!this.memory && action) {
+              this.result =[[`${event.target.innerHTML}` , this.valueBase[event.target.dataset.item]]];
+              this.memory = event.target.innerHTML;
               this.onDisplay(this.memory);
               action--;
             }
@@ -50,6 +64,7 @@ export class Calculator {
           if (event.target.className === 'operand__item') {
             if (!this.memory) {
               this.memory = `${this.operator} (${event.target.innerText})`;
+              this.result = Boolean(this.valueBase[event.target.dataset.item]);
               this.onDisplay(this.memory);
               action = 0;
             }
