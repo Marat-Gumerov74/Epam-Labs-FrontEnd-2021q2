@@ -9,7 +9,7 @@ function start() {
   const menuButtonSecond = document.querySelector('.menu__button-2');
   const menuButtonThird = document.querySelector('.menu__button-3');
 
-  menuButtonFirst.addEventListener('click', (e) =>{
+  menuButtonFirst.addEventListener('click', () =>{
     calc.setOperator('==');
     calc.hide('.menu__button-2');
     calc.hide('.menu__button-3');
@@ -17,7 +17,7 @@ function start() {
     calc.addOperand();
   });
 
-  menuButtonSecond.addEventListener('click', (e) => {
+  menuButtonSecond.addEventListener('click', () => {
     calc.setOperator('===');
     calc.hide('.menu__button-1');
     calc.hide('.menu__button-3');
@@ -25,7 +25,7 @@ function start() {
     calc.addOperand();
   });
 
-  menuButtonThird.addEventListener('click', (e) => {
+  menuButtonThird.addEventListener('click', () => {
     calc.setOperator('if');
     calc.hide('.menu__button-1');
     calc.hide('.menu__button-2');
