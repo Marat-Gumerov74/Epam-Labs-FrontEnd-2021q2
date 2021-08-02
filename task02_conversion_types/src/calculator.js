@@ -34,13 +34,6 @@ export class Calculator {
      document.querySelector(str).className += ` hide`;
   }
 
-  // show (str) {
-  //   const el = document.querySelector(str);
-  //   (/hide$/.test(el.className))?
-  //     el.className = el.className.slice(0, -5):
-  //     console.log(`ошибка: нету совпадение в элементе с классом ${el.className}`);
-  // }
-
   calculate() {
     let conversion;
 
