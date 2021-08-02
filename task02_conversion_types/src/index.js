@@ -5,31 +5,10 @@ document.addEventListener("DOMContentLoaded ", start());
 function start() {
   const calc = new Calculator();
 
-  const menuButtonFirst = document.querySelector('.menu__button-1');
-  const menuButtonSecond = document.querySelector('.menu__button-2');
-  const menuButtonThird = document.querySelector('.menu__button-3');
-
-  menuButtonFirst.addEventListener('click', () =>{
-    calc.setOperator('==');
-    calc.hide('.menu__button-2');
-    calc.hide('.menu__button-3');
-    calc.onDisplay('choose the first and second operand for comparison');
-    calc.addOperand();
-  });
-
-  menuButtonSecond.addEventListener('click', () => {
-    calc.setOperator('===');
-    calc.hide('.menu__button-1');
-    calc.hide('.menu__button-3');
-    calc.onDisplay('choose the first and second operand for comparison');
-    calc.addOperand();
-  });
-
-  menuButtonThird.addEventListener('click', () => {
-    calc.setOperator('if');
-    calc.hide('.menu__button-1');
-    calc.hide('.menu__button-2');
-    calc.onDisplay('choose expression');
-    calc.addOperand();
+  const menuWrapper = document.querySelector('.menu');
+  menuWrapper.addEventListener('click', (e) => {
+    if (e.target.className === 'menu__button') {
+      calc.chooseType(e.target.dataset.menu);
+    }
   });
 };

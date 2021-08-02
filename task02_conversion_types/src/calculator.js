@@ -1,7 +1,7 @@
 export class Calculator {
   constructor(){
     this.valueBase = [ true, false, 1,0,-1, "true","false","1","0","-1","",null,
-                       undefined,Infinity,-Infinity,[],{},[[]],[0],[1],NaN ]
+                       undefined,Infinity,-Infinity,[],{},[[]],[0],[1],NaN ];
     this.display = null;
     this.memory = null;
     this.operator = null;
@@ -21,8 +21,16 @@ export class Calculator {
     document.location.reload();
   }
 
-  setOperator(str) {
-    this.operator = str;
+  chooseType (dataBtn) {
+    const arrBtn = document.querySelectorAll('.menu__button');
+    for (let i = 0; i < arrBtn.length; i++) {
+      if (arrBtn[i].dataset.menu !== dataBtn) {
+        this.hide(arrBtn[i]);
+      } else {
+        this.operator = dataBtn;
+        this.onDisplay(arrBtn[i].dataset.message);
+      }
+    }
   }
 
   onDisplay(str) {
@@ -31,14 +39,17 @@ export class Calculator {
   }
 
   hide (str) {
-     document.querySelector(str).className += ` hide`;
+    (typeof str !== "string")?
+      str.className+= ` hide`:
+      document.querySelector(str).className += ` hide`;
+    
   }
 
   calculate() {
     let conversion;
 
     if (this.operator === this._ifOperator) {
-      this.onDisplay(`${this.memory}   --- is be  ${this.result}`)
+      this.onDisplay(`${this.memory}   --- is be  ${this.result}`);
       this.addreoladBtn();
     } else {
       const first = this.result[0][1];
