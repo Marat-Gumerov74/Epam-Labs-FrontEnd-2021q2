@@ -1,19 +1,13 @@
+ import { Comparison } from './comparison.js';
+
 export class Calculator {
   constructor(){
     this.valueBase = [ true, false, 1,0,-1, "true","false","1","0","-1","",null,
                        undefined,Infinity,-Infinity,[],{},[[]],[0],[1],NaN ];
-    this.display = null;
-    this.memory = null;
     this.operator = null;
-    this.ready = false;
-    this.result = null;
     this._SimpleComparison = '==';
     this._StrictComparison = '===';
     this._ifOperator = 'if';
-    this.action = 2;
-
-    this._panelBlock = document.querySelector('.operands__wrapper');
-    this._panel = document.querySelector('.first-operand');
     this._btnReloadWrapper = document.querySelector('.btnReload-wrapper');
   }
 
@@ -29,6 +23,7 @@ export class Calculator {
       } else {
         this.operator = dataBtn;
         this.onDisplay(arrBtn[i].dataset.message);
+        this.fillData();
       }
     }
   }
@@ -45,23 +40,9 @@ export class Calculator {
     
   }
 
-  calculate() {
-    let conversion;
-
-    if (this.operator === this._ifOperator) {
-      this.onDisplay(`${this.memory}   --- is be  ${this.result}`);
-      this.addreoladBtn();
-    } else {
-      const first = this.result[0][1];
-      const second = this.result[1][1];
-
-      (this.operator === this._SimpleComparison)?
-        conversion = first == second:
-        conversion = first === second;
-
-      this.onDisplay(`${this.memory}   --- is be  ${conversion}`);
-      this.addreoladBtn();
-      };
+  displayResult(arr) {
+    this.onDisplay(`${arr[0]} ${arr[1]}`)
+    this.addreoladBtn();
   }
 
   addreoladBtn() {
@@ -78,43 +59,26 @@ export class Calculator {
     btn.parentNode.removeChild(btn);
   }
 
-  addOperand() {
-    let action = 2;
+  isAmountOperators(operator) {
+    return (operator === this._SimpleComparison || operator === this._StrictComparison)? 2 : 1;
+  }
+ 
+  fillData() {
+    const comparison = new Comparison(this.isAmountOperators(this.operator));
     const wrapper = document.querySelector('.operands__wrapper');
+
     wrapper.addEventListener('click', event => {
-      // сепарация по оператору
-      // '==' && '==='
-      if (action > 0 && (this.operator === this._SimpleComparison || this.operator === this._StrictComparison)) {
-        if (event.target.className === 'operand__item') {
-          if (this.memory && action) {
-            this.result.push([`${event.target.innerHTML}`, this.valueBase[event.target.dataset.item]]);
-            this.memory += `${this.operator} ${event.target.innerHTML}`;
-            this.onDisplay(`${this.memory}`);
-            action--;
-          } else if (!this.memory && action) {
-            this.result = [
-              [`${event.target.innerHTML}`, this.valueBase[event.target.dataset.item]]
-            ];
-            this.memory = event.target.innerHTML;
-            this.onDisplay(this.memory);
-            action--;
-          }
+      if (!comparison.isDataFill && event.target.className === 'operand__item') {
+          this.onDisplay(event.target.innerHTML);
+          const arr = [event.target.innerHTML, this.valueBase[event.target.dataset.item]];
+          console.log(`arr = ${arr}`);
+          comparison.addDataButton(arr);
         }
-        // 'if'
-      } else if (action > 0 && (this.operator === this._ifOperator)) {
-        if (event.target.className === 'operand__item') {
-          if (!this.memory) {
-            this.memory = `${this.operator} (${event.target.innerText})`;
-            this.result = Boolean(this.valueBase[event.target.dataset.item]);
-            this.onDisplay(this.memory);
-            action = 0;
-          }
+
+      if (comparison.isDataFill) {
+        comparison.compareData(this.operator);
+        this.displayResult([comparison.getResultMessage(), comparison.getResilt()]);
         }
-      }
-      if (!action) {
-        this.hide('.first-operand');
-        this.calculate();
-      }
-    });
+      });
   }
 }
