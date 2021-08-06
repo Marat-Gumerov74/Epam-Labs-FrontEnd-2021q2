@@ -9,11 +9,24 @@ header {
   margin-bottom: 50px;
   border-radius: 10px;
 }
-section {
-  font-size: 24px;
-  min-width: 400px;
-  min-height: 300px;
+
+main {
+  display: flex;
+  justify-content: space-around;
+}
+
+.title {
   text-align: center;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+.counts {
+  font-size: 24px;
+  width: 400px;
+  min-height: 300px;
+  padding: 0  10px;
+  text-align: center;
+  word-wrap: break-word;
 }
 
 button {
