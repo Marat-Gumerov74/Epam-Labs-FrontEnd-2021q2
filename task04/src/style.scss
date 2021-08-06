@@ -13,6 +13,7 @@ header {
 main {
   display: flex;
   justify-content: space-around;
+  margin-bottom: 50px;
 }
 
 .title {
@@ -31,4 +32,21 @@ main {
 
 button {
   background-color: #bc4124;
+}
+
+table {
+  border-collapse: collapse;
+  /*убираем пустые промежутки между ячейками*/
+  border: 1px solid grey;
+  /*устанавливаем для таблицы внешнюю границу серого цвета толщиной 1px*/
+  border: 3px solid grey;
+  width: 300px;
+}
+
+th,
+td {
+  border: 1px solid grey;
+  text-align: center;
+  padding: 5px;
+  font-size: 14px;
 }
