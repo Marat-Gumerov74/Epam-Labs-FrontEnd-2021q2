@@ -3,4 +3,4 @@ import "./reset.scss";
 import "./style.scss";
 
 
-const fillTable = new FillTable(10);
+new FillTable(10);

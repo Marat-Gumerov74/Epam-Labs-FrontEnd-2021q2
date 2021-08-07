@@ -17,11 +17,9 @@ export class FillTable {
   };
 
   checkElement(prop) {
-    if (this.analitic[prop]) {
-      this.analitic[prop] = this.analitic[prop] + 1;
-    } else {
+    (this.analitic[prop])?
+      this.analitic[prop] = this.analitic[prop] + 1:
       this.analitic[prop] = 1;
-    }
   };
 
   addToTable() {
