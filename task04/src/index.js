@@ -4,4 +4,3 @@ import "./style.scss";
 
 
 const fillTable = new FillTable(10);
-fillTable.addToTable();
