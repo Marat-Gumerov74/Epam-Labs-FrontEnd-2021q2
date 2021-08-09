@@ -19,6 +19,7 @@ console.log('result resInter:', resInter);
       result[key] = collectObj[i][key];
     };
   };
+  
   return result;
 };
 
@@ -27,9 +28,9 @@ console.log('result resInter:', resInter);
 
     for (let i = 1; i < collectObj.length; i++) {
       for (let key in collectObj[i]) {
-        (result.hasOwnProperty(key)) ?
-        result["new" + key] = collectObj[i][key]:
-          result[key] = collectObj[i][key];
+        if (result.hasOwnProperty(key)) {
+           result["new" + key] = collectObj[i][key];
+        };
       };
     };
 
