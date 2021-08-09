@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>conversion magic</title>
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <h1>conversion magic task</h1>
+      </header>
+    <main>
+      <section>
+        <p class="title">Hello! Choose something from this</p>
+        <div class="menu">
+          <button type="button" class="menu__button" data-menu="==" data-message="choose the first and second operand for comparison">first == second</button>
+          <button type="button" class="menu__button" data-menu="===" data-message="choose the first and second operand for comparison">first === second</button>
+          <button type="button" class="menu__button" data-menu="if" data-message="choose expression">"if ( expression )"</button>
+        </div>
+        <div class="display">Display</div>
+
+        <div class="operands__wrapper">
+          <div class="first-operand">
+            <h3>choose  operand</h3>
+            <ul class="operand-list">
+              <li><button type="button" class="operand__item" data-item="0">true</button></li>
+              <li><button type="button" class="operand__item" data-item="1">false</button></li>
+              <li><button type="button" class="operand__item" data-item="2">1</button></li>
+              <li><button type="button" class="operand__item" data-item="3">0</button></li>
+              <li><button type="button" class="operand__item" data-item="4">-1</button></li>
+              <li><button type="button" class="operand__item" data-item="5">"true"</button></li>
+              <li><button type="button" class="operand__item" data-item="6">"false"</button></li>
+              <li><button type="button" class="operand__item" data-item="7">"1"</button></li>
+              <li><button type="button" class="operand__item" data-item="8">"0"</button></li>
+              <li><button type="button" class="operand__item" data-item="9">"-1"</button></li>
+              <li><button type="button" class="operand__item" data-item="10">""</button></li>
+              <li><button type="button" class="operand__item" data-item="11">null</button></li>
+              <li><button type="button" class="operand__item" data-item="12">undefined</button></li>
+              <li><button type="button" class="operand__item" data-item="13">Infinity</button></li>
+              <li><button type="button" class="operand__item" data-item="14">-Infinity</button></li>
+              <li><button type="button" class="operand__item" data-item="15">[]</button></li>
+              <li><button type="button" class="operand__item" data-item="16">{}</button></li>
+              <li><button type="button" class="operand__item" data-item="17">[[]]</button></li>
+              <li><button type="button" class="operand__item" data-item="18">[0]</button></li>
+              <li><button type="button" class="operand__item" data-item="19">[1]</button></li>
+              <li><button type="button" class="operand__item" data-item="20">NaN</button></li>
+            </ul>
+          </div>
+          </div>
+          <div class="btnReload-wrapper"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+<script type="module" src="comparison.js"></script>
+<script type="module" src="calculator.js"></script>
+<script type="module" src="index.js"></script>
+
+
+</body>
+</html>
