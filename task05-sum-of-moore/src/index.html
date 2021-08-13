@@ -4,12 +4,31 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style/style.css">
   <title>Sum of Moore</title>
 </head>
 <body>
-  <h1 class="title"> hello</h1>
-  <script type="module" src="index.js"></script>
-  <!-- <script type="module" src="range.js"></script> -->
+    <form action="" class="decor" name="sumForm">
+      <h3>Находим сумму чисел в диапазоне</h3>
+      <div class="form-group">
+        <div class="group-item">
+          <input type="number" pattern="^[ 0-9]+$" id="first" name="first"  required><label for="first">min</label>
+        </div>
+        <div class="group-item">
+          <input type="number" pattern="^[ 0-9]+$" id="second" name="first" required><label for="second">max</label>
+        </div>
+      </div>
+      <div class="display">
+        <p >Сумма равна:</p>
+      </div>
+      <div class="submit-block">
+        <div class="submit-button">
+          <input id='btnSubmit' type="button" value="Вычислить" >
+        </div>
+      </div>
+    </form>
+  <script  type="module" src="./script/index.js"></script>
+  <script  type="module" src="./script/range.js"></script>
+  <script  type="module" src="./script/display.js"></script>
 </body>
 </html>
