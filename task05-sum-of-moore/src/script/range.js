@@ -1,60 +1,25 @@
 import { display } from "./display.js";
 
-
-
 export class Range {
   constructor() {
-    this.pair = [];
-    this.base = [];
-  }
-
-  setPair(min, max) {
-    this.pair = [min, max];
-  }
-
-  addToBase () {
-    this.base.push(this.pair);
-  };
-
-  isPairFind() {
-    let result = false;
-    for (let i = 0; i < this.base.length; i++) {
-      if (this.base[i][0] == this.pair[0] && this.base[i][1] == this.pair[1]) {
-        result = true;
-      }
-    }
-    return result;
-  };
-
-  setResult(result) {
-    for (let i = 0; i < this.base.length; i++) {
-      if (this.base[i][0] == this.pair[0] && this.base[i][1] == this.pair[1]) {
-        this.base[i].push(result);
-      }
-    }
+    this.myStorage = window.localStorage;
   }
 
   compute(minStr, maxStr) {
     let result;
-    this.setPair(minStr, maxStr);
-    if ( this.isPairFind() == false) {
-        this.addToBase();
-        result =  this.ranging();
-        this.setResult(result);
-        return result;
+    let key = JSON.stringify([minStr, maxStr]);
+
+    if (this.myStorage.getItem(key)) {
+      return Number(this.myStorage.getItem(key));
     } else {
-      for (let i = 0; i < this.base.length; i++) {
-        if (this.base[i][0] == this.pair[0] && this.base[i][1] == this.pair[1]) {
-          return this.base[i][2];
-        }
-      }
+      result = this.ranging(minStr, maxStr);
+      this.myStorage.setItem(key, String(result));
+      return result;
     }
   }
 
-  ranging() {
+  ranging(min, max) {
     let result = null;
-    let min = this.pair[0];
-    let max = this.pair[1];
 
     function makeBigSum(a) {
       return function (b) {
@@ -70,7 +35,7 @@ export class Range {
 
     try {
       if (min >= max) {
-        display('min больше или равно max');
+        display('Ошибка: min больше или равно max');
       } else {
         result = (makeNormalSum(min)(max) > Number.MAX_SAFE_INTEGER) ?
           makeBigSum(min)(max) :
