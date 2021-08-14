@@ -1,8 +1,8 @@
-import { doRange } from "./range.js";
+import { Range} from "./range.js";
 import { display } from "./display.js";
 
+const range = new Range();
 const btn = document.getElementById('btnSubmit');
-console.log(btn);
 btn. addEventListener('click', work);
 
 function work() {
@@ -10,7 +10,8 @@ function work() {
   let first = document.getElementById("first").value;
   let second = document.getElementById("second").value;
   clearInpits();
-  display(doRange(first, second));
+
+  display(range.compute(first, second));
 }
 
 function clearInpits() {
