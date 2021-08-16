@@ -21,7 +21,7 @@ export class FillTable {
 
   checkElement(prop) {
     (this.analitic[prop])?
-      this.analitic[prop] +=1:    //checked && correct
+      this.analitic[prop] +=1:
       this.analitic[prop] = 1;
   };
 
@@ -30,20 +30,17 @@ export class FillTable {
     const table = document.querySelector(`.${selector}`);
     if (table) {
       for (let key in collection) {
-        this.createRow(table, key, collection[key]);
+        let row = document.createElement('tr');
+        row.append(this.createCastomElement(key));
+        row.append(this.createCastomElement(collection[key]));
+        table.append(row);
       }
     }
   };
 
-  createRow(table, key, prop) {
-    let tr = document.createElement('tr');
+  createCastomElement(str) {
     let td = document.createElement('td');
-    td.innerHTML = key;
-    tr.append(td);
-
-    let td2 = document.createElement('td');
-    td2.innerHTML = prop;
-    tr.append(td2);
-    table.append(tr);
+    td.innerHTML = str;
+    return td;
   }
 };
