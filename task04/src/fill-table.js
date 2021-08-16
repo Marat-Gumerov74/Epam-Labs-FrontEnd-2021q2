@@ -28,15 +28,17 @@ export class FillTable {
 
   fillTable(selector, collection){
     const table = document.querySelector(`.${selector}`);
-    if (table) {
-      for (let key in collection) {
-        let row = document.createElement('tr');
-        row.append(this.createCastomElement(key));
-        row.append(this.createCastomElement(collection[key]));
-        table.append(row);
-      }
+    for (let key in collection) {
+      table.append(this.createCastomRow(key, collection[key]));
     }
   };
+
+  createCastomRow(first, second) {
+    let row = document.createElement('tr');
+    row.append(this.createCastomElement(first));
+    row.append(this.createCastomElement(second));
+    return row;
+  }
 
   createCastomElement(str) {
     let td = document.createElement('td');
