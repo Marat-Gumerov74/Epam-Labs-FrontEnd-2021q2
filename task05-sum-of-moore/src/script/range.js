@@ -35,14 +35,14 @@ export class Range {
 
     try {
       if (min >= max) {
-        display('Ошибка: min больше или равно max');
+        display('Error: min is greater than or equal to max');
       } else {
         result = (makeNormalSum(min)(max) > Number.MAX_SAFE_INTEGER) ?
           makeBigSum(min)(max) :
           makeNormalSum(min)(max);
       }
     } catch (e) {
-      display('Извините в данных ошибка');
+      display('Sorry data error');
     }
     return result;
   }
