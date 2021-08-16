@@ -21,7 +21,7 @@ export class FillTable {
 
   checkElement(prop) {
     (this.analitic[prop])?
-      this.analitic[prop] = this.analitic[prop] + 1:    //checked && correct
+      this.analitic[prop] +=1:    //checked && correct
       this.analitic[prop] = 1;
   };
 
