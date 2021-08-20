@@ -1,16 +1,4 @@
-export class permutation {
-  constructor(word) {
-    this.word = word;
-    this.result = null;
-    this.calculate();
-  }
-
-  getResult() {
-    return this.result;
-  }
-
-  calculate() {
-    console.log(1);
+export function permutation (word) {
     let arr = [word];
     let anagrams = {};
 
@@ -23,6 +11,7 @@ export class permutation {
       };
       recurse('', str);
     });
-    this.result = (Object.keys(anagrams));
-  }
+    
+    let result = Object.keys(anagrams);
+    return result;
 }
