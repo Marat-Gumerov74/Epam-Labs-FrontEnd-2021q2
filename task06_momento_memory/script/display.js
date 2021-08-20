@@ -9,7 +9,7 @@ export function display(src) {
     let display = document.querySelector('.display');
     display.innerHTML = '';
     let p = document.createElement("p");
-    p.innerHTML = 'сумма равна:';
+    p.innerHTML = 'получились варианты:';
     document.querySelector('.display').append(p);
   }
 }
