@@ -8,6 +8,22 @@
   <title>Momento Memory</title>
 </head>
 <body>
-  <script type="module" src="index.js"></script>
+  <form action="" class="decor" name="sumForm">
+    <h3>Enter a word</h3>
+    <div class="form-group">
+      <div class="group-item">
+        <input type="text" pattern="[A-Za-zА-Яа-яЁё]{3,}" id="word" name="word" required><label for="word">word</label>
+      </div>
+    </div>
+    <div class="display">
+      <p>Варианты:</p>
+    </div>
+    <div class="submit-block">
+      <div class="submit-button">
+        <input id='btnSubmit' type="button" value="Вычислить">
+      </div>
+    </div>
+  </form>
+  <script type="module" src="./script/index.js"></script>
 </body>
 </html>

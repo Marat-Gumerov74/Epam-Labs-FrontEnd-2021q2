@@ -3,14 +3,19 @@
 }
 
 body {
-  background: #f69a73;
+  background: #FFC75F;
+ font-family: Helvetica;
+ font-weight: bold;
 }
 
 .decor {
+  padding: 10px;
+  color: #ffffff;
   position: relative;
-  max-width: 330px;
+  max-width: 430px;
   margin: 50px auto 0;
-  background: rgba(151, 65, 65, 0.548);
+  background: #1d4c88;
+  border: 1px solid #0099E0;
   border-radius: 30px;
   display: flex;
   flex-direction: column;
