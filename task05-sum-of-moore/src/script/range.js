@@ -6,7 +6,7 @@ export class Range {
   }
 
   isValidValues(minStr, maxStr) {
-    return Boolean((typeof minStr === 'number' && typeof maxStr === 'number') &&
+    return ((typeof minStr === 'number' && typeof maxStr === 'number') &&
         (Number.isInteger(minStr) && Number.isInteger(maxStr)) &&
         ((minStr > 0 && minStr > 0) && (maxStr > minStr)))
   }
