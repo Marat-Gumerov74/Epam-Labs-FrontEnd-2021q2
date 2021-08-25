@@ -7,11 +7,20 @@ btn. addEventListener('click', work);
 function work() {
   display("clear");
   let word = document.getElementById("word").value;
-  clearInpits();
-   display(permutation(word));
-  setTimeout(display,5000,"clear");
+  clearInputs();
+  calculate(word);
+
+  setTimeout(display,10000,"clear");
 }
 
-function clearInpits() {
+function calculate(word) {
+  let isWord = (str) => (/^[A-Za-zА-Яа-яЁё]+$/.test(str));
+
+  (isWord(word))?
+      display(permutation(word)):
+      display(`Not a word was introduced`);
+}
+
+function clearInputs() {
   document.getElementById('word').value = '';
 }

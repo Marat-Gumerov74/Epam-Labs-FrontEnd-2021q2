@@ -11,7 +11,6 @@ export function permutation (word) {
       };
       recurse('', str);
     });
-    
-    let result = Object.keys(anagrams);
-    return result;
+
+    return Object.keys(anagrams);
 }
