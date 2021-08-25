@@ -1,20 +1,20 @@
-import { Range} from "./range.js";
+import { Range } from "./range.js";
 import { display } from "./display.js";
 
 const range = new Range();
-const btn = document.getElementById('btnSubmit');
+const btn = document.getElementById('btn-submit');
 btn. addEventListener('click', work);
 
 function work() {
   display("clear");
   let first = document.getElementById("first").value;
   let second = document.getElementById("second").value;
-  clearInpits();
+  clearInputs();
 
   display(range.compute(first, second));
 }
 
-function clearInpits() {
+function clearInputs() {
     document.getElementById('first').value = '';
     document.getElementById('second').value = '';
 }

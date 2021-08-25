@@ -1,15 +1,12 @@
-export function display(src) {
-  if (src) {
-     let p = document.createElement("p")
-     p.innerHTML = src;
-     document.querySelector('.display').append(p);
-  }
-
-  if (src == 'clear') {
+export function display(src = null) {
     let display = document.querySelector('.display');
-    display.innerHTML = '';
-    let p = document.createElement("p");
-    p.innerHTML = 'сумма равна:';
-    document.querySelector('.display').append(p);
-  }
+    let p = document.createElement("p")
+
+    if(src === "clear") {
+        display.innerHTML = '';
+        p.innerHTML = 'The sum is:';
+    } else if (src) {
+        p.innerHTML = src;
+    }
+    display.append(p);
 }
