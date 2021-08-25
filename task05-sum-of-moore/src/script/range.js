@@ -5,7 +5,18 @@ export class Range {
     this.myStorage = window.localStorage;
   }
 
+  isValidValues(minStr, maxStr) {
+    return Boolean((typeof minStr === 'number' && typeof maxStr === 'number') &&
+        ((minStr > 0 && minStr > 0) && (maxStr > minStr)))
+  }
+
   compute(minStr, maxStr) {
+    return (this.isValidValues(Number(minStr), Number(maxStr))) ?
+            this.dataProcessing(minStr, maxStr):
+            `The entered data is not correct`;
+  }
+
+  dataProcessing(minStr, maxStr){
     let result;
     let key = JSON.stringify([minStr, maxStr]);
 

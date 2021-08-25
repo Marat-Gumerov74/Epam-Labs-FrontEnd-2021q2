@@ -55,6 +55,11 @@ input {
 
 p {
   margin-left: 10px;
+  word-wrap:break-word;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  padding: 5px;
 }
 
 input::-webkit-outer-spin-button,

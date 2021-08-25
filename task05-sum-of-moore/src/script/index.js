@@ -10,7 +10,6 @@ function work() {
   let first = document.getElementById("first").value;
   let second = document.getElementById("second").value;
   clearInputs();
-
   display(range.compute(first, second));
 }
 
