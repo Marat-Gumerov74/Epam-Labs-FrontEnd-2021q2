@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style/style.css">
+  <title>Momento Memory</title>
+</head>
+<body>
+  <form action="" class="decor" name="sumForm">
+    <h3>Enter a word</h3>
+    <div class="form-group">
+      <div class="group-item">
+        <input type="text" pattern="[A-Za-zА-Яа-яЁё]{3,}" id="word" name="word" required><label for="word">word</label>
+      </div>
+    </div>
+    <div class="display">
+      <p>Variants of words:</p>
+    </div>
+    <div class="submit-block">
+      <div class="submit-button">
+        <input id='btnSubmit' type="button" value="Calculate">
+      </div>
+    </div>
+  </form>
+  <script type="module" src="./script/index.js"></script>
+  <script type="module" src="./script/display.js"></script>
+  <script type="module" src="./script/permutation.js"></script>
+</body>
+</html>
