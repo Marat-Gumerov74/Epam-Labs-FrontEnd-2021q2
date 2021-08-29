@@ -1,6 +1,6 @@
 Home task #8 
    1) Describe base class Entity that can store name
-   - базовый класс - Автомобиль (Car) 
+   - базовый класс - Автомобиль (Transport) 
                      поле: модель (автомобиля)
    2) Implement child classes Stuff, Box, User. 
       Box can store some stuff[]. Every box belongs to user
