@@ -1,18 +1,18 @@
 const Car = require("../modules/mashines/car");
 const Track = require("../modules/mashines/truck");
-const Persone = require("../modules/persone/persone")
+const Person = require("../modules/person/person.js");
 
 const car1 = new Car("mersedes", "black", 2.0, 1650, 4);
-const persone1 = new Persone("Ivan");
+const person1 = new Person("Ivan");
 
 
 const car2 = new Track('Reno', 'red', 4.8, 5200, 3, 8000, 18)
-const persone2 = new Persone('Oleg');
+const person2 = new Person('Oleg');
 
 
 
-persone1.setOwns(car1);
-persone2.setOwns(car2);
+person1.setOwns(car1);
+person2.setOwns(car2);
 
-console.log('Persone 1 =', persone1.getName(), persone1.getOwns());
-console.log('Persone 2 =', persone2.getName(), persone2.getOwns());
+console.log('Person 1 =', person1.getName(), person1.getOwns());
+console.log('Person 2 =', person2.getName(), person2.getOwns());

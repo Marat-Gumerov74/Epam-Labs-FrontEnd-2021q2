@@ -1,4 +1,4 @@
-class Persone {
+class Person {
     constructor(name) {
         this.name = name;
         this.owns = null;
@@ -10,4 +10,4 @@ class Persone {
     setOwns = (obj) => this.owns = obj;
 }
 
-module.exports = Persone;
+module.exports = Person;

@@ -13,7 +13,7 @@ Home task #8
         bus:
         has a field: double-Decker
    3) Add example of usage of these classes, e.g., create some instances, display data related to them
-      Add the Persone class
+      Add the Person class
       name field
       owns field; - put copies of the car there.
    4) Push code to repo “sweet sugar”
