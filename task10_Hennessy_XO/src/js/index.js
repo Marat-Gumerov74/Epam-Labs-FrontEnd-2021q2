@@ -1,26 +1,21 @@
-import { renderField } from "./renderField.js";
-import { Info } from  './info.js'
-import  { Game } from './game.js'
-const info = new Info;
 
+import { renderField } from "./renderField.js";
 window.onload = function () {
     renderField();
-    info.startInfo();
-    let game = new Game();
-    game.start()
+
     let step = 0;
 
-    // document.getElementById('game').onclick = function (event) {
-    //     if (event.target.className === 'block') {
-    //         if(step % 2 === 0) {
-    //             event.target.innerHTML = 'X';
-    //         } else {
-    //             event.target.innerHTML = 'O';
-    //         }
-    //         step++;
-    //         checkWinner();
-    //     }
-    // }
+    document.getElementById('game').onclick = function (event) {
+        if (event.target.className === 'block') {
+            if(step % 2 === 0) {
+                event.target.innerHTML = 'X';
+            } else {
+                event.target.innerHTML = 'O';
+            }
+            step++;
+            checkWinner();
+        }
+    }
 
     function checkWinner () {
         let allblock = document.querySelectorAll('.block');

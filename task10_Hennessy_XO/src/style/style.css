@@ -1,18 +1,10 @@
 body {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.info {
-    text-align: center;
-    line-height: 30px;
-    margin-top: 50px;
-    height: 50px;
-    margin-bottom: 50px;
+    justify-content: center;
 }
 
 #game {
+    margin-top: 100px;
     width: 150px;
     height: 150px;
     background: #bc4124;
