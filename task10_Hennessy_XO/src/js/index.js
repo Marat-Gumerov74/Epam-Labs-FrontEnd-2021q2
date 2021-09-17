@@ -9,7 +9,6 @@ window.onload = function () {
     info.startInfo();
     let step = 0;
     let resultGame = checkGame(step);
-    console.log(resultGame)
 
     document.getElementById('game').onclick = function (event) {
         resultGame = checkGame(step);
@@ -21,7 +20,6 @@ window.onload = function () {
             }
             step++;
             let resultGame = checkGame(step);
-            console.log(`result game`, resultGame);
             if (resultGame) {
                 info.announcedWinner(resultGame);
             }
