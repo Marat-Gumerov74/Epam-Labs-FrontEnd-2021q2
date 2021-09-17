@@ -11,7 +11,7 @@ window.onload = function () {
     let resultGame = checkGame(step);
     // Load score
 
-    document.getElementById('game').onclick = function (event) {
+    let go = function (event) {
         resultGame = checkGame(step);
         if (event.target.className === 'block' && !resultGame && event.target.innerHTML === "") {
             if(step % 2 === 0) {
@@ -20,13 +20,16 @@ window.onload = function () {
                 event.target.innerHTML = 'O';
             }
             step++;
-            let resultGame = checkGame(step);
+            resultGame = checkGame(step);
             if (resultGame) {
+                document.getElementById('game').removeEventListener('click', go)
                 info.announcedWinner(resultGame);
-
             }
         }
     }
+
+    document.getElementById('game')
+        .addEventListener('click',  go );
 }
 
 
