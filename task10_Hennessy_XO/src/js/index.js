@@ -9,6 +9,7 @@ window.onload = function () {
     info.startInfo();
     let step = 0;
     let resultGame = checkGame(step);
+    // Load score
 
     document.getElementById('game').onclick = function (event) {
         resultGame = checkGame(step);
