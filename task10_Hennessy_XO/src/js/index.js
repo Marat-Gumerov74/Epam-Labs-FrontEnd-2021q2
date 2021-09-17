@@ -22,6 +22,7 @@ window.onload = function () {
             let resultGame = checkGame(step);
             if (resultGame) {
                 info.announcedWinner(resultGame);
+
             }
         }
     }
