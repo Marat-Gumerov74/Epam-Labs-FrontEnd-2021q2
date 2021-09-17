@@ -1,6 +1,7 @@
 import { display } from "./display.js";
 import { permutation } from "./permutation.js";
 
+
 const btn = document.getElementById('btnSubmit');
 btn. addEventListener('click', work);
 
