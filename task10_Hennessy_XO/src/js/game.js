@@ -29,28 +29,30 @@ export class Game {
     checkWinner = () => {
         let allblock = document.querySelectorAll('.block');
         let winner;
+
+        let isFind = ([el1,el2,el3], text) => (el1.innerHTML === text && el2.innerHTML === text && el3.innerHTML === text)
+
         if (
-            (allblock[0].innerHTML==="X" && allblock[1].innerHTML==="X" && allblock[2].innerHTML === 'X') ||
-            (allblock[3].innerHTML==="X" && allblock[4].innerHTML==="X" && allblock[5].innerHTML === 'X') ||
-            (allblock[6].innerHTML==="X" && allblock[7].innerHTML==="X" && allblock[8].innerHTML === 'X') ||
-            (allblock[0].innerHTML==="X" && allblock[3].innerHTML==="X" && allblock[6].innerHTML === 'X') ||
-            (allblock[1].innerHTML==="X" && allblock[4].innerHTML==="X" && allblock[7].innerHTML === 'X') ||
-            (allblock[2].innerHTML==="X" && allblock[5].innerHTML==="X" && allblock[8].innerHTML === 'X') ||
-            (allblock[0].innerHTML==="X" && allblock[4].innerHTML==="X" && allblock[8].innerHTML === 'X') ||
-            (allblock[0].innerHTML==="X" && allblock[4].innerHTML==="X" && allblock[8].innerHTML === 'X') ||
-            (allblock[6].innerHTML==="X" && allblock[4].innerHTML==="X" && allblock[2].innerHTML === 'X')
+            isFind([allblock[0], allblock[1], allblock[2]], "X") ||
+            isFind([allblock[3], allblock[4], allblock[5]], "X") ||
+            isFind([allblock[6], allblock[7], allblock[8]], "X") ||
+            isFind([allblock[0], allblock[3], allblock[6]], "X") ||
+            isFind([allblock[1], allblock[4], allblock[7]], "X") ||
+            isFind([allblock[2], allblock[5], allblock[8]], "X") ||
+            isFind([allblock[0], allblock[4], allblock[8]], "X") ||
+            isFind([allblock[6], allblock[4], allblock[2]], "X")
         )
         {
             winner = 1;
         } else if (
-            (allblock[0].innerHTML==="O" && allblock[1].innerHTML==="O" && allblock[2].innerHTML==="O" ) ||
-            (allblock[3].innerHTML==="O" && allblock[4].innerHTML==="O" && allblock[5].innerHTML==="O" ) ||
-            (allblock[6].innerHTML==="O" && allblock[7].innerHTML==="O" && allblock[8].innerHTML==="O" ) ||
-            (allblock[0].innerHTML==="O" && allblock[3].innerHTML==="O" && allblock[6].innerHTML==="O" ) ||
-            (allblock[1].innerHTML==="O" && allblock[4].innerHTML==="O" && allblock[7].innerHTML==="O" ) ||
-            (allblock[2].innerHTML==="O" && allblock[5].innerHTML==="O" && allblock[8].innerHTML==="O" ) ||
-            (allblock[0].innerHTML==="O" && allblock[4].innerHTML==="O" && allblock[8].innerHTML==="O" ) ||
-            (allblock[6].innerHTML==="O" && allblock[4].innerHTML==="O" && allblock[2].innerHTML==="O" )
+            isFind([allblock[0], allblock[1], allblock[2]], "O") ||
+            isFind([allblock[3], allblock[4], allblock[5]], "O") ||
+            isFind([allblock[6], allblock[7], allblock[8]], "O") ||
+            isFind([allblock[0], allblock[3], allblock[6]], "O") ||
+            isFind([allblock[1], allblock[4], allblock[7]], "O") ||
+            isFind([allblock[2], allblock[5], allblock[8]], "O") ||
+            isFind([allblock[0], allblock[4], allblock[8]], "O") ||
+            isFind([allblock[6], allblock[4], allblock[2]], "O")
         ) {
             winner = 2;
         } else {
