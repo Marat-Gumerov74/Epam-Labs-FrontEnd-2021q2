@@ -1,14 +1,14 @@
 export let data = {
     "1": {
-        "name": "Max",
-        "Age": "30",
+        "name": "B",
+        "age": "30",
          },
     "2": {
-        "name": "Anna",
-        "Age": "25",
+        "name": "C",
+        "age": "25",
          },
     "3": {
-        "name": "Allan",
-        "Age": "40",
+        "name": "A",
+        "age": "40",
          },
 }

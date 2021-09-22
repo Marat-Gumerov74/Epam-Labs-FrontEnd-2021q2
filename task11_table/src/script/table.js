@@ -4,12 +4,13 @@ export class Table {
     constructor() {
         this.structure = null;
         this.loadData();
-        this.render()
+        this.render();
+        this.editingTd = null;
     }
 
     loadData () {
-        this.structure = Object.entries(data).map(el => el[1]).map(el => Object.entries(el));
-        console.log(`take data`, this.structure);
+        this.structure = Object.entries(data).map(el => el[1]);
+        console.log(`its  structure`, this.structure);
     }
 
     render () {
@@ -19,36 +20,68 @@ export class Table {
 
     onHead = (event) => {
         if(event.target.innerText === 'name'){
-            console.log("name")
-            console.log(` sort by name`)
+            this.sortBy('name')
+            this.render()
+
         } else if (event.target.innerText === 'age'){
-            console.log("age")
-            console.log(` sort by age`)
-        } else if (event.target.nodeName === 'TD') {
-            console.log(event.target.nodeName)
-            console.log(`edit td`)
+            this.sortBy('age')
+            this.render()
         }
     }
 
-    onClick () {
-        document.addEventListener('click', this.onHead )
+    sortBy = (str) => {
+        this.structure =  this.structure.sort(function(x, y){
+            if (x[str] < y[str]) {
+                return -1;
+            }
+            if (x[str] > y[str]) {
+                return 1;
+            }
+                return 0;
+            });
+    }
 
+    onClick () {
+        document.addEventListener('click', this.onHead );
+        const tds = document.querySelectorAll('td');
+
+        for (let i = 0; i < tds.length; i++) {
+            tds[i].addEventListener('click', function func() {
+                let input = document.createElement('input');
+                input.value = this.innerHTML;
+                this.innerHTML = '';
+                this.appendChild(input);
+                let td = this;
+                input.addEventListener('blur', function() {
+                    td.innerHTML = this.value;
+                    td.addEventListener('click', func);
+                });
+
+                this.removeEventListener('click', func);
+            });
+        }
     }
 
     build () {
-        let table = document.querySelector('.table')
+        let table = document.querySelector('.table');
+        this.clearAttachment(table);
+        this.buildHeader(table);
+
         for (let element of this.structure) {
             let tr = document.createElement('tr')
             tr.className = 'tr';
             let name = document.createElement('td');
-            name.innerHTML = `${element[0][1]}`
+            name.innerHTML = `${element.name}`
             let age = document.createElement('td');
-            age.innerHTML = `${element[1][1]}`
+            age.innerHTML = `${element.age}`
             tr.prepend(name);
             tr.append(age)
             table.append(tr)
         }
     }
 
+    clearAttachment = tag => tag.innerHTML = '';
 
+    buildHeader = tag => tag.insertAdjacentHTML('afterbegin',
+                    `<tr class="head"><th>name</th><th>age</th></tr>`);
 }
