@@ -5,12 +5,10 @@ export class Table {
         this.structure = null;
         this.loadData();
         this.render();
-        this.editingTd = null;
     }
 
     loadData () {
         this.structure = Object.entries(data).map(el => el[1]);
-        console.log(`its  structure`, this.structure);
     }
 
     render () {
