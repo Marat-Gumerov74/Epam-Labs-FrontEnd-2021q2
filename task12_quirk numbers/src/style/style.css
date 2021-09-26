@@ -1,62 +1,59 @@
-* {
+*, *::before, *::after {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    font-family: Gotham Rounded, sans-serif;
+    font-weight: normal;
 }
 
 body {
-    background-color: grey;
-    width: 100%;
-    height: 100%;
-    display: flex;
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(to right, #00AAFF, #00FF6C);
+}
+
+.calculator-grid {
+    display: grid;
     justify-content: center;
+    align-content: center;
+    min-height: 100vh;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
 }
 
-.calculator {
-    width: 600px;
-    height: 400px;
-    background-color: rgba(86, 113, 210, 0.66);
+.calculator-grid > button {
+    cursor: pointer;
+    font-size: 2rem;
+    border: 1px solid white;
+    outline: none;
+    background-color: rgba(255, 255, 255, .75);
+}
+
+.calculator-grid > button:hover {
+    background-color: rgba(255, 255, 255, .9);
+}
+
+.span-line {
+
+    grid-row: span 2;
+}
+
+.output {
+    grid-column: 1 / -1;
+    background-color: rgba(0, 0, 0, .75);
     display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
     flex-direction: column;
-    align-items: center;
-    border: 1px solid black;
-    border-radius: 10px;
+    padding: 10px;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
-.display {
-    margin-top: 15px;
-    height: 80px;
-    width: 95%;
-    background-color: #112625;
-    border: 1px solid black;
-    border-radius: 10px;
+.output .previous-operand {
+    color: rgba(255, 255, 255, .75);
+    font-size: 1.5rem;
 }
 
-.panel {
-    margin-top: 15px;
-    height: 67%;
-    width: 95%;
-    background-color: #778181;
-    border: 1px solid black;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
+.output .current-operand {
+    color: white;
+    font-size: 2.5rem;
 }
-
-.panel ul {
-    list-style-type: none;
-    display: flex;
-}
-
-li {
-    padding: 25px 30px;
-    background-color: rgba(40, 136, 136, 0.51);
-    border: 1px solid black;
-    border-radius: 33%;
-}
-
-.list-ops {
-    border: 1px solid black;
-}
-
-
