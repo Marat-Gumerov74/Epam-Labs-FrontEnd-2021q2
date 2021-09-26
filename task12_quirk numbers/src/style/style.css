@@ -1,3 +1,9 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background-color: grey;
     width: 100%;
@@ -13,6 +19,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
 }
 
 .display {
@@ -20,5 +28,35 @@ body {
     height: 80px;
     width: 95%;
     background-color: #112625;
+    border: 1px solid black;
+    border-radius: 10px;
 }
+
+.panel {
+    margin-top: 15px;
+    height: 67%;
+    width: 95%;
+    background-color: #778181;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel ul {
+    list-style-type: none;
+    display: flex;
+}
+
+li {
+    padding: 25px 30px;
+    background-color: rgba(40, 136, 136, 0.51);
+    border: 1px solid black;
+    border-radius: 33%;
+}
+
+.list-ops {
+    border: 1px solid black;
+}
+
 
