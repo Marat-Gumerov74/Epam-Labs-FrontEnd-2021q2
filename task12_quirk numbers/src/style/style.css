@@ -32,7 +32,6 @@ body {
 }
 
 .span-line {
-
     grid-row: span 2;
 }
 
@@ -46,11 +45,6 @@ body {
     padding: 10px;
     word-wrap: break-word;
     word-break: break-all;
-}
-
-.output .previous-operand {
-    color: rgba(255, 255, 255, .75);
-    font-size: 1.5rem;
 }
 
 .output .current-operand {
