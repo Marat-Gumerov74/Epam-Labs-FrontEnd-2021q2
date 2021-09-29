@@ -1,136 +1,141 @@
+
 export class Calculator {
-    constructor(previousOperandTextElement, currentOperandTextElement) {
-        this.previousOperandTextElement = previousOperandTextElement;
+    constructor( currentOperandTextElement) {
         this.currentOperandTextElement = currentOperandTextElement;
-        this.readyToReset = false;
         this.clear();
+        this.memory = [];
+        this.stack = [];
+        this.readyResult = false;
+        this.isNeedClear = false;
     }
 
     clear() {
+        this.clearRam();
         this.currentOperand = '';
-        this.previousOperand = '';
-        this.operation = undefined;
-        this.readyToReset = false;
-    }
-
-    delete() {
-        this.currentOperand = this.currentOperand.toString().slice(0, -1);
+        this.readyResult = false;
+        this.stack = [];
+        this.isNeedClear = false;
     }
 
     appendNumber(number) {
-        if (number === '.' && this.currentOperand.includes('.')) return;
-        this.currentOperand = this.currentOperand.toString() + number.toString();
-    }
-
-    findLonger(first, second) {
-        const f = x => ((x.toString().includes('.')) ? (x.toString().split('.').pop().length) : (0));
-        let a = f(Math.abs(first));
-        let b = f(Math.abs(second));
-        console.log( a, b);
-        return a > b ? a + 1 : b + 1;
-    }
-
-    errorMessage() {
-        this.currentOperand = ''
-        this.previousOperand = ''
-        this.operation =  `error`;
-        this.updateDisplay();
-    }
-
-    chooseSpecial(specOperation) {
-        if (this.currentOperand === '') return
-        switch (specOperation) {
-            case '±':
-                this.currentOperand = this.currentOperand * (-1);
-                break
-            case '√':
-                this.currentOperand = this.currentOperand > 0 ? Math.sqrt(this.currentOperand) : this.errorMessage();
-                break
-            case '1/𝒙':
-                this.currentOperand = 1 / this.currentOperand;
-                break
-            case '%':
-                this.currentOperand = (this.previousOperand / 100) * this.currentOperand;
-                break
-            default:
-                return;
-        }
-        this.specOperation = '';
-        if (specOperation === '±' && this.operation !== undefined){
-            return
+        if (!this.isNeedClear){
+            this.currentOperand = this.currentOperand.toString() + number.toString();
+            this.addToRam(number.toString());
         } else {
-            this.previousOperand = this.currentOperand;
+            this.currentOperand = `please push AC`
         }
-
     }
 
-    chooseOperation(operation) {
-        if (this.currentOperand === '') return;
-        if (this.currentOperand !== '' && this.previousOperand !== '') this.compute()
-        this.operation = operation;
-        this.previousOperand = this.currentOperand;
-        this.currentOperand = '';
-    }
-
-    compute() {
-        let computation;
-        const prev = parseFloat(this.previousOperand);
-        const current = parseFloat(this.currentOperand);
-        if (isNaN(prev) || isNaN(current)) return
-
-        switch (this.operation) {
-            case '+':
-                computation = +(prev + current).toFixed(this.findLonger(prev, current));
-                break
-            case '-':
-                computation = +(prev - current).toFixed(this.findLonger(prev, current));
-                break
-            case '*':
-                computation = +(prev * current).toFixed(this.findLonger(prev, current));
-                break
-            case '^':
-                computation = Math.pow(prev, current);
-                break
-            case '÷':
-                computation = +(prev / current).toFixed(this.findLonger(prev, current));
-                break
-            default:
-                return;
-        }
-        this.readyToReset = true;
-        this.currentOperand = computation;
-        this.operation = undefined;
-        this.previousOperand =''
-    }
-
-    getDisplayNumber(number) {
-        const stringNumber = number.toString()
-        const integerDigits = parseFloat(stringNumber.split('.')[0])
-        const decimalDigits = stringNumber.split('.')[1]
-        let integerDisplay
-
-        if (isNaN(integerDigits)) {
-            integerDisplay = ''
+    appendOperator(sign, meaning) {
+        if (!this.isNeedClear){
+            this.currentOperand = this.currentOperand.toString() + sign.toString();
+            this.addToRam(meaning.toString());
         } else {
-            integerDisplay = integerDigits.toLocaleString('en', {
-                maximumFractionDigits: 0
-            })
-        }
-        if (decimalDigits != null) {
-            return `${integerDisplay}.${decimalDigits}`
-        } else {
-            return integerDisplay
+            this.currentOperand = `please push AC`
         }
     }
 
-    updateDisplay() {
-        this.currentOperandTextElement.innerText =
-            this.getDisplayNumber(this.currentOperand)
-        if (this.operation != null) {
-            this.previousOperandTextElement.innerText =
-                `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`;
-        }else {
-            this.previousOperandTextElement.innerText='';
+    normalizeMemory() {
+        this.aggregatesDigits();
+        this.sortMemory();
+    }
+
+    aggregatesDigits (){
+        let element = "";
+        let arr = this.memory;
+        let newArr = [];
+        for (let i = 0; i < arr.length; i++) {
+            if ( Number(arr[i])) {
+                element += arr[i];
+            } else {
+                newArr.push(element);
+                element = ""
+                newArr.push(arr[i]);
+            }
         }
+        if (element) newArr.push(element);
+        this.memory = newArr;
+    }
+
+    sortMemory () {
+        let arr = this.memory.filter(el => el !== '')
+        for (let i = 0; i <arr.length -1 ; i++) {
+            if (!(Number(arr[i])) && (Number(arr[i+1]) || arr[i+1] === '0')) {
+                let el = arr[i+1];
+                arr[i+1] = arr[i];
+                arr[i] = el;
+            }
+        }
+        this.memory = arr;
+    }
+
+    async computeAll() {
+        this.stack = this.memory;
+        while (!this.readyResult) {
+            if (this.stack[0] && this.stack[1] && this.stack[2] && !this.readyResult) {
+                let swap =  await this.compute(this.stack[0], this.stack[1], this.stack[2])
+                this.stack.splice(0, 3, swap);
+            } else {
+                this.readyResult = !this.readyResult;
+                let res = this.stack[0];
+                this.stack = [];
+                return res;
+            }
+        }
+    }
+
+    async buildResult () {
+        if (this.memory.length === 0 || (isNaN(parseInt(this.memory[this.memory.length-1])))) return
+        this.normalizeMemory();
+        this.currentOperand = await this.computeAll();
+        this.updateDisplay(true);
+    }
+
+    addToRam = (el) => this.memory.push(el);
+
+    clearRam = () => this.memory = [];
+
+    updateDisplay = (isNeedClear = false) => {
+        this.currentOperandTextElement.innerText = this.currentOperand;
+        this.isNeedClear = isNeedClear;
+    }
+
+    getPause = () => Math.floor(Math.random() * (4000 - 1000) + 1000)
+
+    async compute (first, second, operator) {
+        const myPromise = new Promise((res) => {
+            setTimeout(() => {
+                res(this.getResult(first, second, operator))
+            }, this.getPause())
+        })
+
+        return await myPromise.then((body) => {
+            return body;
+        });
+    }
+
+    getResult = (first, second, operator) => {
+        let computation = null;
+        if ((first === "0" || second === "0") && operator === 'division') {
+            return 0
+        } else {
+            switch (operator) {
+                case 'addition':
+                    computation = (Number(first) + Number(second));
+                    break
+                case 'subtraction':
+                    computation = (Number(first) - Number(second));
+                    break
+                case 'multiplication':
+                    computation = (Number(first) * Number(second));
+                    break
+                case 'division':
+                    computation = (Number(first) / Number(second));
+                    break
+                default:
+                    return;
+            }
+        }
+        return computation;
     }
 }

@@ -4,19 +4,12 @@ const numberButtons = document.querySelectorAll('[data-number]');
 const operationButtons = document.querySelectorAll('[data-operation]');
 const equalsButton = document.querySelector('[data-equals]');
 const allClearButton = document.querySelector('[data-all-clear]');
-const previousOperandTextElement = document.querySelector('[data-previous-operand]');
 const currentOperandTextElement = document.querySelector('[data-current-operand]');
 
-const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
+const calculator = new Calculator(currentOperandTextElement)
 
 numberButtons.forEach(button => {
     button.addEventListener("click", () => {
-        if (calculator.previousOperand === "" &&
-            calculator.currentOperand !== "" &&
-            calculator.readyToReset) {
-            calculator.currentOperand = "";
-            calculator.readyToReset = false;
-        }
         calculator.appendNumber(button.innerText)
         calculator.updateDisplay();
     })
@@ -24,18 +17,16 @@ numberButtons.forEach(button => {
 
 operationButtons.forEach(button => {
     button.addEventListener('click', () => {
-        calculator.chooseOperation(button.innerText);
+        calculator.appendOperator( button.innerText, button.getAttribute("data-btn"))
         calculator.updateDisplay();
     })
 })
 
 equalsButton.addEventListener('click', button => {
-    calculator.compute();
-    calculator.updateDisplay();
+    calculator.buildResult();
 })
 
 allClearButton.addEventListener('click', button => {
     calculator.clear();
     calculator.updateDisplay();
 })
-

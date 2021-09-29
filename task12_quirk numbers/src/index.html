@@ -11,30 +11,28 @@
 <body>
     <div class="calculator-grid">
         <div class="output">
-            <div data-previous-operand class="previous-operand"></div>
             <div data-current-operand class="current-operand"></div>
         </div>
         <button data-number>1</button>
         <button data-number>2</button>
         <button data-number>3</button>
-        <button data-operation>÷</button>
+        <button data-operation data-btn="division">÷</button>
 
         <button data-number>4</button>
         <button data-number>5</button>
         <button data-number>6</button>
-        <button data-operation>*</button>
+        <button data-operation data-btn="multiplication">*</button>
 
         <button data-number>7</button>
         <button data-number>8</button>
         <button data-number>9</button>
-        <button data-operation>-</button>
+        <button data-operation data-btn="subtraction">-</button>
 
         <button data-equals >=</button>
         <button data-number>0</button>
         <button data-all-clear >AC</button>
-        <button data-operation>+</button>
+        <button data-operation data-btn="addition">+</button>
     </div>
     <script type="module" src="./script/index.js"></script>
-    <script type="module" src="./script/calculator.js"></script>
 </body>
 </html>
