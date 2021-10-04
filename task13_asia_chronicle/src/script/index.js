@@ -1,10 +1,14 @@
-// import { dataCollector } from './dataCollector.js';
 import { Render } from  './render.js';
 
 window.onload = function() {
     const render = new Render();
-    render.addListenTitle();
-    render.addListenCategories();
-    render.loadData();
-     render.loadTitle();
+    /*
+    класс должен загружать :
+        - массив категорий.
+        - для каждой категории вытянуть первые 3 карточки.
+        - зарендерить.
+     */
+    // render.addListenTitle();
+    // render.addListenCategories();
+    // render.setData();
 };

@@ -1,8 +1,8 @@
 export class DataCollector {
-    async getData () {
+    async getData (url) {
         let data;
         try {
-            const res = await fetch('https://api.publicapis.org/entries');
+            const res = await fetch(`${url}`);
             if (!res.ok) {
                 throw new Error(res.statusText);
             }
@@ -13,9 +13,3 @@ export class DataCollector {
         return data;
     }
 }
-//
-// fetch('http://example.com/’)
-//     .then(response => response.json())
-//     .then(data)=> {
-//     console.log(data);
-// });
