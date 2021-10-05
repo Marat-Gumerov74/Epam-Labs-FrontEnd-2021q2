@@ -5,31 +5,21 @@ export class Render {
         this.dataCollector = new DataCollector();
         this.dataCategories = null;
         this.dataCategory = {};
-        this.loadCategories()
+        this.buildCategories();
     }
 
-    async loadCategories() {
+    async buildCategories() {
         this.dataCategories = await this.loadData('https://api.publicapis.org/categories');
-        this.renderCategories()
-        this.listenerButton()
-        this.listenerCategory()
+        this.renderCategories();
+        this.onClickButton();
+        this.addListenerCategory();
     }
 
     async loadCategory(name) {
-        //this.clearCategory()
         let data = await this.loadData(`https://api.publicapis.org/entries?category=${name}`);
         this.addToDataCategory(name, data.entries)
-        //console.log(this.dataCategory)
-        this.renderCategory(name)
-        // this.listenerButton()
-        // this.listenerCategory()
+        this.renderCategory(name);
     }
-
-    // clearCategory () {
-    //     if (this.dataCategory){
-    //
-    //     }
-    // }
 
     addToDataCategory = (key, prop) => this.dataCategory.key = prop;
 
@@ -38,10 +28,8 @@ export class Render {
         return data.key;
     }
 
-
     renderCategory(str) {
         let dataCategories = this.getFromDataCategory(str);
-        console.log(dataCategories)
         let category = [...document.querySelectorAll('.dropdown-category')]
             .filter(el => el.innerHTML === str)
             .shift();
@@ -51,12 +39,9 @@ export class Render {
         for (let i = 0; i < 3; i++) {
             let title = Object.values(dataCategories[i])[0]
             titleWrapper.insertAdjacentHTML('beforeend', `<p class="title">${title}</p>`)
-            console.log(titleWrapper)
             }
-
         category.insertAdjacentElement('beforeend', titleWrapper)
     }
-
 
     async loadData(url) {
         return await this.dataCollector.getData(`${url}`)
@@ -72,8 +57,7 @@ export class Render {
         }
     }
 
-
-    listenerButton() {
+    onClickButton() {
         document.body.addEventListener('click', function (e) {
             if (e.target.classList.contains("drop-btn")) {
                 document.querySelector('.dropdown-categories').classList.toggle("show");
@@ -81,18 +65,18 @@ export class Render {
         })
     }
 
-
-    listenerCategory = () => {
+    addListenerCategory = () => {
         let categories = document.querySelectorAll('.dropdown-category')
-        categories.forEach(category => category.addEventListener('click', this.buildCategory))
+        categories.forEach(category => category.addEventListener('click', this.addCategory))
     }
 
-    buildCategory = (e) =>  this.loadCategory(`${e.target.innerHTML}`);
+    addCategory = (e) => {
+        this.clearSubmenu()
+        this.loadCategory(`${e.target.innerHTML}`);
+    }
 
-
-        // if (e.target.classList.contains('dropdown-category')) {
-        //     this.renderCategory(e.target.innerHTML)
-        //     //console.log(e.target.innerHTML)
-        // }
-
+    clearSubmenu = () =>{
+        let subMenu = document.querySelector('.sub-dropdown-menu');
+        if (subMenu) subMenu.remove();
+    }
 }
