@@ -16,8 +16,9 @@ export class Render {
     }
 
     async loadCategory(name) {
-        let data = await this.loadData(`https://api.publicapis.org/entries?category=${name}`);
-        this.addToDataCategory(name, data.entries)
+        let correctedName = name.split(' ')[0].toLowerCase();
+        let data = await this.loadData(`https://api.publicapis.org/entries?category=${correctedName}`);
+        this.addToDataCategory(name, data.entries);
         this.renderCategory(name);
     }
 
@@ -25,7 +26,7 @@ export class Render {
 
     getFromDataCategory = (key) => {
         let data = this.dataCategory;
-        return data.key;
+        return data[key];
     }
 
     renderCategory(str) {
