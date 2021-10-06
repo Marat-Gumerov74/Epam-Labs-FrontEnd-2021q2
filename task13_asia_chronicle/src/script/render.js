@@ -26,7 +26,7 @@ export class Render {
 
     getFromDataCategory = (key) => {
         let data = this.dataCategory;
-        return data[key];
+        return data.key;
     }
 
     renderCategory(str) {
