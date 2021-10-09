@@ -40,3 +40,9 @@ input {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
+.td-input {
+    background-color: #b77b6c;
+    width: 100%;
+    height: 20px;
+}

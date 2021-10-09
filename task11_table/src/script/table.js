@@ -1,85 +1,117 @@
-import { data } from "./data.js"
+import { data as remoteData } from "./data.js"
+
 
 export class Table {
     constructor() {
-        this.structure = null;
-        this.loadData();
+        this.data = remoteData;
+        this.table = null;
+        this.render(false)
+    }
+
+    render(isSetTable = true){
+        if (!isSetTable) {
+            this.createTable();
+            this.onFocusTd()
+        } else {
+            this.setToTable()
+            this.createTable();
+            this.onFocusTd()
+        }
+    }
+
+    setToTable () {
+        let data = this.data;
+        this.table = document.querySelector('.table');
+        let tds = [...document.querySelectorAll('.td')];
+        for (let i = 0; i < tds.length; ){
+            for (let row of data) {
+                row.name = tds[i].innerText;
+                i++;
+                row.age = tds[i].innerText;
+                i++;
+            }
+        }
+        this.data = data;
+    }
+
+    createTable () {
+        const body = document.querySelector('body')
+        body.innerText ='';
+        let table = document.createElement('table');
+            table.className = 'table'
+            table.insertAdjacentHTML('afterbegin', `
+            <tbody>
+                <tr class="head">
+                    <th class="head-first">name</th>
+                    <th class="head-second">age</th>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr class="row-1">
+                    <td class="td-name-1 td" contenteditable="true" data-id="340">${this.data[0].name}</td>
+                    <td class="td-age-1 td" contenteditable="true" data-id="580">${this.data[0].age}</td>
+                </tr>
+                 <tr class="row-2">
+                    <td class="td-name-2 td" contenteditable="true" data-id="56">${this.data[1].name}</td>
+                    <td class="td-age-2 td"  contenteditable="true" data-id="617">${this.data[1].age}</td>
+                 </tr>
+                 <tr class="row-3">
+                    <td class="td-name-3 td" contenteditable="true" data-id="308">${this.data[2].name}</td>
+                    <td class="td-age-3 td" contenteditable="true" data-id="658">${this.data[2].age}</td>
+                </tr>
+            </tbody>
+        `)
+        body.insertAdjacentElement('afterbegin', table);
+        this.onClickTable();
+    }
+
+    onClickTable () {
+        document.querySelector('.table').addEventListener('click', this.splitListeners);
+    }
+
+    onFocusTd = () => {
+        const tds =  document.querySelectorAll('.td');
+        tds.forEach(el => el.addEventListener('focusout', this.updateTd))
+    }
+
+    updateTd = () => {
+        const tds =  document.querySelectorAll('.td');
+        tds.forEach(el => el.removeEventListener('focusout', this.rerender))
         this.render();
     }
 
-    loadData () {
-        this.structure = Object.entries(data).map(el => el[1]);
-    }
-
-    render () {
-        this.build();
-        this.onClick();
-    }
-
-    onHead = (event) => {
-        if(event.target.innerText === 'name'){
-            this.sortBy('name')
-            this.render()
-
-        } else if (event.target.innerText === 'age'){
-            this.sortBy('age')
-            this.render()
+    splitListeners = (event) => {
+        switch (event.target.className) {
+            case 'head-first':
+                this.sortBy('name', 0)
+                this.render(false);
+                break;
+            case 'head-second':
+                this.sortBy('age', 1)
+                this.render(false);
+                break;
         }
     }
 
     sortBy = (str) => {
-        this.structure =  this.structure.sort(function(x, y){
-            if (x[str] < y[str]) {
-                return -1;
-            }
-            if (x[str] > y[str]) {
-                return 1;
-            }
-                return 0;
+        if (str === 'name') {
+            this.data.sort(function (a, b) {
+                if (a.name > b.name) {
+                    return 1;
+                }
+                if (a.name < b.name) {
+                    return -1;
+                }
             });
-    }
-
-    onClick () {
-        document.addEventListener('click', this.onHead );
-        const tds = document.querySelectorAll('td');
-
-        for (let i = 0; i < tds.length; i++) {
-            tds[i].addEventListener('click', function func() {
-                let input = document.createElement('input');
-                input.value = this.innerHTML;
-                this.innerHTML = '';
-                this.appendChild(input);
-                let td = this;
-                input.addEventListener('blur', function() {
-                    td.innerHTML = this.value;
-                    td.addEventListener('click', func);
-                });
-
-                this.removeEventListener('click', func);
+        } else {
+            this.data.sort(function (a, b) {
+                if (a.age > b.age) {
+                    return 1;
+                }
+                if (a.age < b.age) {
+                    return -1;
+                }
             });
         }
     }
-
-    build () {
-        let table = document.querySelector('.table');
-        this.clearAttachment(table);
-        this.buildHeader(table);
-
-        for (let element of this.structure) {
-            let tr = document.createElement('tr')
-            tr.className = 'tr';
-            let name = document.createElement('td');
-            name.innerHTML = `${element.name}`
-            let age = document.createElement('td');
-            age.innerHTML = `${element.age}`
-            tr.prepend(name);
-            tr.append(age)
-            table.append(tr)
-        }
-    }
-
-    clearAttachment = tag => tag.innerHTML = '';
-
-    buildHeader = tag => tag.insertAdjacentHTML('afterbegin',
-                    `<tr class="head"><th>name</th><th>age</th></tr>`);
 }

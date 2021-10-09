@@ -1,14 +1,14 @@
-export let data = {
-    "1": {
-        "name": "B",
-        "age": "30",
-         },
-    "2": {
-        "name": "C",
-        "age": "25",
-         },
-    "3": {
-        "name": "A",
-        "age": "40",
-         },
-}
+export let data = [
+    {
+        'name': 'b',
+         'age':22,
+    },
+    {
+        'name': 'c',
+        'age':20,
+    },
+    {
+        'name': 'a',
+        'age':18,
+    }
+]
