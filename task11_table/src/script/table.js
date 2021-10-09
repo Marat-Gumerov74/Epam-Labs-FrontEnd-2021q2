@@ -4,7 +4,6 @@ import { data as remoteData } from "./data.js"
 export class Table {
     constructor() {
         this.data = remoteData;
-        this.table = null;
         this.render(false)
     }
 
@@ -21,7 +20,6 @@ export class Table {
 
     setToTable () {
         let data = this.data;
-        this.table = document.querySelector('.table');
         let tds = [...document.querySelectorAll('.td')];
         for (let i = 0; i < tds.length; ){
             for (let row of data) {
@@ -76,7 +74,7 @@ export class Table {
 
     updateTd = () => {
         const tds =  document.querySelectorAll('.td');
-        tds.forEach(el => el.removeEventListener('focusout', this.rerender))
+        tds.forEach(el => el.removeEventListener('focusout', this.updateTd))
         this.render();
     }
 
