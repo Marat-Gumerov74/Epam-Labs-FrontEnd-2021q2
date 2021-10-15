@@ -35,40 +35,6 @@ export class Calculator {
         }
     }
 
-    normalizeMemory() {
-        this.aggregatesDigits();
-        this.sortMemory();
-    }
-
-    aggregatesDigits (){
-        let element = "";
-        let arr = this.memory;
-        let newArr = [];
-        for (let i = 0; i < arr.length; i++) {
-            if ( Number(arr[i])) {
-                element += arr[i];
-            } else {
-                newArr.push(element);
-                element = ""
-                newArr.push(arr[i]);
-            }
-        }
-        if (element) newArr.push(element);
-        this.memory = newArr;
-    }
-
-    sortMemory () {
-        let arr = this.memory.filter(el => el !== '')
-        for (let i = 0; i <arr.length -1 ; i++) {
-            if (!(Number(arr[i])) && (Number(arr[i+1]) || arr[i+1] === '0')) {
-                let el = arr[i+1];
-                arr[i+1] = arr[i];
-                arr[i] = el;
-            }
-        }
-        this.memory = arr;
-    }
-
     async computeAll() {
         this.stack = this.memory;
         while (!this.readyResult) {
@@ -85,8 +51,6 @@ export class Calculator {
     }
 
     async buildResult () {
-        if (this.memory.length === 0 || (isNaN(parseInt(this.memory[this.memory.length-1])))) return
-        this.normalizeMemory();
         this.currentOperand = await this.computeAll();
         this.updateDisplay(true);
     }
