@@ -1,6 +1,6 @@
-const  DataCollector = require('./dataCollector');
+import { DataCollector } from './dataCollector'
 
-module.exports =  class Render {
+export class Render {
     constructor() {
         this.dataCollector = new DataCollector();
         this.dataCategories = null;

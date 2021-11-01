@@ -1,6 +1,14 @@
 import '../style/style.scss'
-const  Render = require('./render');
 
-window.onload = function() {
-    new Render();
+window.onload = async function() {
+    try {
+        const Render = await import('./render')
+        console.log(Render)
+        new Render.Render()
+    } catch (error) {
+        const wrapper = document.querySelector('.wrapper')
+        wrapper.insertAdjacentHTML('beforeend', `
+        <h3>Something got lost in our code along the way. 
+        We're sorry and will try to fix it right after lunch.</h3>`)
+    }
 };

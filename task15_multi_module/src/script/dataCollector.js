@@ -1,4 +1,4 @@
-module.exports = class DataCollector {
+export class DataCollector {
     async getData (url) {
         let data;
         try {
